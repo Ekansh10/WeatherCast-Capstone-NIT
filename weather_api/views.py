@@ -21,10 +21,11 @@ def registrationPage(request):
         pass1=request.POST.get('password1')
         pass2=request.POST.get('password2')
 
-        if pass1!=pass2:
-            return HttpResponse("Your password and confirm password are not Same!!")
+        if uname == "" or email == "" or pass1 == "" or pass2 == "":
+            return HttpResponse("Please fill the complete form !!")
+        elif pass1!=pass2:
+            return HttpResponse("Your password and confirm password are not Same !!")
         else:
-
             my_user=User.objects.create_user(uname,email,pass1)
             my_user.save()
             return redirect('login')
